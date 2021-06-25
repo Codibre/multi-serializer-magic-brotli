@@ -1,5 +1,5 @@
 import { Serialized, isStream, concatStream } from 'multi-serializer';
-import { Stream } from 'stream';
+import { Stream, PassThrough } from 'stream';
 
 const HEADER_LIMIT = 4;
 const HEADERS = [0xce, 0xb2, 0xcf, 0x81];
@@ -18,6 +18,10 @@ export async function isMagicBrotli(content: Serialized | Stream) {
 	};
 }
 
-export function streamMagicBrotli(brotli: Buffer) {
-	return Buffer.concat([bufferHeaders, brotli]);
+export function streamMagicBrotli(brotli: Stream) {
+	const pass = new PassThrough();
+	pass.write(bufferHeaders);
+	brotli.pipe(pass);
+	brotli.on('end', () => pass.emit('end'));
+	return pass;
 }
