@@ -19,7 +19,7 @@ export class MagicBrotliStrategy
 		return streamMagicBrotli(brotli);
 	}
 
-	async deserialize(content: Serialized | Stream): Promise<Buffer> {
+	async deserialize(content: Serialized | Stream): Promise<Serialized> {
 		const { isBrotli, wholeContent } = await isMagicBrotli(content);
 		return isBrotli ? decompress(wholeContent, this.options) : wholeContent;
 	}

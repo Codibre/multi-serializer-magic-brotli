@@ -13,4 +13,15 @@ describe('index.ts', () => {
 
 		expect(read.toString()).toEqual(req);
 	});
+
+	it('should not decompress i its not magic brotli', async () => {
+		const req = JSON.stringify({
+			bar: 'abc',
+		});
+		const serializer = new MagicBrotliStrategy();
+
+		const read = await concatStream(await serializer.deserialize(req));
+
+		expect(read.toString()).toEqual(req);
+	});
 });

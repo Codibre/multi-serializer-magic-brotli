@@ -11,9 +11,7 @@ export async function isMagicBrotli(content: Serialized | Stream) {
 	}
 	const buff = Buffer.from(content.slice(0, HEADER_LIMIT) as ArrayBuffer);
 	const isBrotli = HEADERS.every((x, idx) => buff[idx] === x);
-	const wholeContent = isBrotli
-		? (content.slice(HEADER_LIMIT) as Buffer)
-		: buff;
+	const wholeContent = isBrotli ? content.slice(HEADER_LIMIT) : content;
 	return {
 		isBrotli,
 		wholeContent,
