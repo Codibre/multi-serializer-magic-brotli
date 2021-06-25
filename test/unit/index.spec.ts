@@ -1,11 +1,16 @@
+import { concatStream } from 'multi-serializer';
+import { MagicBrotliStrategy } from '../../src/magic-brotli-strategy';
+
 describe('index.ts', () => {
-	afterEach(() => {
-		delete require.cache[require.resolve('../../src/index')];
-	});
+	it('should compress and decompress', async () => {
+		const req = JSON.stringify({
+			bar: 'abc',
+		});
+		const serializer = new MagicBrotliStrategy();
 
-	it('should start things', () => {
-		require('../../src/index');
+		const write = await serializer.serialize(req);
+		const read = await concatStream(await serializer.deserialize(write));
 
-		expect(jest.fn()).toHaveCallsLike();
+		expect(read.toString()).toEqual(req);
 	});
 });
