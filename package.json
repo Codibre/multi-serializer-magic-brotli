@@ -2,7 +2,6 @@
   "name": "@multi-serializer/magic-brotli",
   "description": "This project is just a template for creation of new projects",
   "version": "0.0.1",
-  "private": true,
   "author": {
     "name": "Thiago O Santos <tos.oliveira@gmail.com>"
   },
@@ -65,11 +64,11 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/codibre/@multi-serializer/magic-brotli.git"
+    "url": "https://github.com/codibre/multi-serializer-magic-brotli.git"
   },
-  "homepage": "https://github.com/codibre/@multi-serializer/magic-brotli#readme",
+  "homepage": "https://github.com/codibre/multi-serializer-magic-brotli#readme",
   "bugs": {
-    "url": "https://github.com/codibre/@multi-serializer/magic-brotli/issues"
+    "url": "https://github.com/codibre/multi-serializer-magic-brotli/issues"
   },
   "keywords": [],
   "license": "MIT",
