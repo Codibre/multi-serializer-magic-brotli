@@ -1,5 +1,5 @@
 import { concatStream } from 'multi-serializer';
-import { MagicBrotliStrategy } from '../../src/magic-brotli-strategy';
+import { MagicBrotliStrategy } from '../../src';
 
 describe('index.ts', () => {
 	it('should compress and decompress', async () => {

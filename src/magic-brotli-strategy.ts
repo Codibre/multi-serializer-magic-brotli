@@ -1,7 +1,10 @@
 import {
 	ChainSerializerStrategy,
+	OptionalDeserializer,
 	Serialized,
 	pipeStream,
+	isStream,
+	concatStream,
 } from 'multi-serializer';
 import {
 	BrotliOptions,
@@ -9,11 +12,21 @@ import {
 	createBrotliDecompress,
 } from 'zlib';
 import { Stream } from 'stream';
-import { isMagicBrotli, streamMagicBrotli } from './is-magic-brotli';
+import {
+	isMagicBrotli,
+	removeMagicHeader,
+	streamMagicBrotli,
+} from './is-magic-brotli';
 
 export class MagicBrotliStrategy
-	implements ChainSerializerStrategy<Stream | Serialized> {
+	implements
+		ChainSerializerStrategy<Stream | Serialized>,
+		OptionalDeserializer {
 	constructor(private options?: BrotliOptions) {}
+
+	mustDeserialize(content: Serialized): boolean {
+		return isMagicBrotli(content);
+	}
 
 	async serialize(content: Serialized | Stream): Promise<Stream> {
 		const brotli = pipeStream(content, createBrotliCompress(this.options));
@@ -23,9 +36,13 @@ export class MagicBrotliStrategy
 	async deserialize(
 		content: Serialized | Stream,
 	): Promise<Serialized | Stream> {
-		const { isBrotli, wholeContent } = await isMagicBrotli(content);
-		return isBrotli
-			? pipeStream(wholeContent, createBrotliDecompress(this.options))
-			: wholeContent;
+		if (isStream(content)) {
+			content = await concatStream(content);
+		}
+		if (!this.mustDeserialize(content)) {
+			return content;
+		}
+		content = removeMagicHeader(content);
+		return pipeStream(content, createBrotliDecompress(this.options));
 	}
 }

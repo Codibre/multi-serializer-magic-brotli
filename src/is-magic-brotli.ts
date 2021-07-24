@@ -1,21 +1,18 @@
-import { Serialized, isStream, concatStream } from 'multi-serializer';
+import { Serialized } from 'multi-serializer';
 import { Stream, PassThrough } from 'stream';
 
 const HEADER_LIMIT = 4;
 const HEADERS = [0xce, 0xb2, 0xcf, 0x81];
 const bufferHeaders = Buffer.from(HEADERS);
 
-export async function isMagicBrotli(content: Serialized | Stream) {
-	if (isStream(content)) {
-		content = await concatStream(content);
-	}
+export function removeMagicHeader(content: Serialized) {
+	return content.slice(HEADER_LIMIT);
+}
+
+export function isMagicBrotli(content: Serialized) {
 	const buff = Buffer.from(content.slice(0, HEADER_LIMIT) as ArrayBuffer);
 	const isBrotli = HEADERS.every((x, idx) => buff[idx] === x);
-	const wholeContent = isBrotli ? content.slice(HEADER_LIMIT) : content;
-	return {
-		isBrotli,
-		wholeContent,
-	};
+	return isBrotli;
 }
 
 export function streamMagicBrotli(brotli: Stream) {
