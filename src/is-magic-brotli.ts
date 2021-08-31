@@ -22,3 +22,7 @@ export function streamMagicBrotli(brotli: Stream) {
 	brotli.on('end', () => pass.emit('end'));
 	return pass;
 }
+
+export function serializedMagicBrotli(brotli: Serialized) {
+	return Buffer.concat([bufferHeaders, brotli as Buffer]);
+}
