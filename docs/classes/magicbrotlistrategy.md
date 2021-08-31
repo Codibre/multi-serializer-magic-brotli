@@ -1,4 +1,4 @@
-[fluent-iterable - v0.0.4](../README.md) / MagicBrotliStrategy
+[fluent-iterable - v0.1.0](../README.md) / MagicBrotliStrategy
 
 # Class: MagicBrotliStrategy
 
@@ -13,7 +13,7 @@
 
 - [constructor](magicbrotlistrategy.md#constructor)
 
-### Methods
+### Properties
 
 - [deserialize](magicbrotlistrategy.md#deserialize)
 - [mustDeserialize](magicbrotlistrategy.md#mustdeserialize)
@@ -23,21 +23,25 @@
 
 ### constructor
 
-\+ **new MagicBrotliStrategy**(`options?`: BrotliOptions): [*MagicBrotliStrategy*](magicbrotlistrategy.md)
+\+ **new MagicBrotliStrategy**(`options?`: [*SerializerBrotliOptions*](../interfaces/serializerbrotlioptions.md)): [*MagicBrotliStrategy*](magicbrotlistrategy.md)
 
 #### Parameters:
 
 Name | Type |
 :------ | :------ |
-`options?` | BrotliOptions |
+`options?` | [*SerializerBrotliOptions*](../interfaces/serializerbrotlioptions.md) |
 
 **Returns:** [*MagicBrotliStrategy*](magicbrotlistrategy.md)
 
-## Methods
+## Properties
 
 ### deserialize
 
-▸ **deserialize**(`content`: Serialized \| *Stream*): *Promise*<Serialized \| Stream\>
+• `Readonly` **deserialize**: (`content`: Serialized \| *Stream*) => Serialized \| *Stream* \| *Promise*<Serialized \| Stream\>
+
+#### Type declaration:
+
+▸ (`content`: Serialized \| *Stream*): Serialized \| *Stream* \| *Promise*<Serialized \| Stream\>
 
 #### Parameters:
 
@@ -45,7 +49,7 @@ Name | Type |
 :------ | :------ |
 `content` | Serialized \| *Stream* |
 
-**Returns:** *Promise*<Serialized \| Stream\>
+**Returns:** Serialized \| *Stream* \| *Promise*<Serialized \| Stream\>
 
 Implementation of: void
 
@@ -53,7 +57,11 @@ ___
 
 ### mustDeserialize
 
-▸ **mustDeserialize**(`content`: Serialized): *boolean*
+• `Readonly` **mustDeserialize**: (`content`: Serialized) => *boolean*
+
+#### Type declaration:
+
+▸ (`content`: Serialized): *boolean*
 
 #### Parameters:
 
@@ -69,7 +77,11 @@ ___
 
 ### serialize
 
-▸ **serialize**(`content`: Serialized \| *Stream*): *Promise*<Stream\>
+• `Readonly` **serialize**: (`content`: Serialized \| *Stream*) => Serialized \| *Stream* \| *Promise*<Serialized \| Stream\>
+
+#### Type declaration:
+
+▸ (`content`: Serialized \| *Stream*): Serialized \| *Stream* \| *Promise*<Serialized \| Stream\>
 
 #### Parameters:
 
@@ -77,6 +89,6 @@ Name | Type |
 :------ | :------ |
 `content` | Serialized \| *Stream* |
 
-**Returns:** *Promise*<Stream\>
+**Returns:** Serialized \| *Stream* \| *Promise*<Serialized \| Stream\>
 
 Implementation of: void

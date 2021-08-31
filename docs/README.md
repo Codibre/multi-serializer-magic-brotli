@@ -1,6 +1,6 @@
-fluent-iterable - v0.0.4
+fluent-iterable - v0.1.0
 
-# fluent-iterable - v0.0.4
+# fluent-iterable - v0.1.0
 
 ## Table of contents
 
@@ -8,10 +8,15 @@ fluent-iterable - v0.0.4
 
 - [MagicBrotliStrategy](classes/magicbrotlistrategy.md)
 
+### Interfaces
+
+- [SerializerBrotliOptions](interfaces/serializerbrotlioptions.md)
+
 ### Functions
 
 - [isMagicBrotli](README.md#ismagicbrotli)
 - [removeMagicHeader](README.md#removemagicheader)
+- [serializedMagicBrotli](README.md#serializedmagicbrotli)
 - [streamMagicBrotli](README.md#streammagicbrotli)
 
 ## Functions
@@ -41,6 +46,20 @@ Name | Type |
 `content` | Serialized |
 
 **Returns:** *string* \| ArrayBuffer
+
+___
+
+### serializedMagicBrotli
+
+▸ **serializedMagicBrotli**(`brotli`: Serialized): *Buffer*
+
+#### Parameters:
+
+Name | Type |
+:------ | :------ |
+`brotli` | Serialized |
+
+**Returns:** *Buffer*
 
 ___
 
